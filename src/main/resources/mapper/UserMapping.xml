@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lisy.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.lisy.entity.User">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="insert_uid" jdbcType="INTEGER" property="insert_uid" />
+        <result column="insert_time" jdbcType="DATE" property="insert_time" />
+        <result column="update_time" jdbcType="DATE" property="update_time" />
+        <result column="is_del" jdbcType="INTEGER" property="is_del" />
+        <result column="is_job" jdbcType="INTEGER" property="is_job" />
+        <result column="mcode" jdbcType="VARCHAR" property="mcode" />
+        <result column="send_time" jdbcType="DATE" property="send_time" />
+        <result column="version" jdbcType="INTEGER" property="version" />
+    </resultMap>
+    <!-- 这里是作为一个变量使用-->
+    <sql id="table">user</sql>
+    <select id="findByUserId" resultType="com.lisy.entity.User" parameterType="int">
+        SELECT * FROM
+        <include refid="table"></include>
+        WHERE id = #{id}
+    </select>
+    <insert id="addUser"  parameterType="com.lisy.entity.User">
+        INSERT INTO
+        <include refid="table"></include>
+         (
+             username,
+             mobile,
+             email,
+             password,
+             insert_uid,
+             insert_time,
+             is_del,
+             is_job,
+             mcode,
+             version
+         )
+        VALUES (
+            #{username},
+            #{mobile},
+            #{email},
+            #{password},
+            #{insert_uid},
+            now(),
+            #{is_del},
+            #{is_job},
+            #{mcode},
+            #{version}
+        )
+    </insert>
+    <update id="updateUser" parameterType="com.lisy.entity.User">
+        UPDATE
+        <include refid="table"></include>
+        SET
+            username=#{mybatis},
+            mobile=#{mobile},
+            email=#{email},
+            password=#{password},
+            insert_uid=#{insert_uid},
+            is_del=#{is_del},
+            is_job=#{is_job},
+            mcode=#{mcode},
+            version=#{version}
+        WHERE
+            ID=#{id}
+    </update>
+    <delete id="delUser">
+        DELETE FROM
+        <include refid="table"></include>
+        WHERE id=#{id}
+    </delete>
+    <select id="findAll">
+        SELECT * FROM <include refid="table"></include>
+    </select>
+</mapper>

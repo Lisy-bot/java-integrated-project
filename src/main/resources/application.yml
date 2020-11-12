@@ -1,0 +1,37 @@
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.lisy.entity
+### freemarker模板
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/wyait?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.jdbc.Driver
+  devtools:
+    add-properties: false
+  # 环境配置
+  profiles:
+    active: dev
+  freemarker:
+    suffix: .ftl
+    template-loader-path: classpath:/templates/
+    cache: false
+  # 异常处理直接抛出
+  mvc:
+    throw-exception-if-no-handler-found: true
+    format:
+      time: HH:mm:ss
+    static-path-pattern: classpath:/static/
+  resources:
+    add-mappings: false
+# 日志配置
+logging:
+  config: classpath:logback-spring.xml
+  file:
+    path: classpath:logs
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql

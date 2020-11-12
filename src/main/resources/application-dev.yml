@@ -1,0 +1,9 @@
+server:
+  port: 8080
+#showSql
+logging:
+  level:
+    web: debug
+    com:
+      lisy:
+        mapper : debug
